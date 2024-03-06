@@ -1,0 +1,35 @@
+
+{% block b1 %}
+<h2 align="center"> <font color ="red"> Packages Available </font></h2>
+<table align="center" border="5">
+
+  <thead bgcolor="white" align="center">
+    <tr>
+      <td>musiccode</td>
+      <td>musictitle</td>
+      <td>musicpackage</td>
+      <td>musicdesc</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in placesdata %}
+    <tr align="center">
+      <td>{{i.musiccode}}</td>
+      <td>{{i.musictitle}}</td>
+      <td>{{i.musicpackage}}</td>
+      <td>{{i.musicdesc}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+<style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+        }
+    </style>

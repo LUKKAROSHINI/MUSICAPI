@@ -1,0 +1,47 @@
+{% extends 'adminhome.html' %}
+{% block 'b1'%}
+
+<h2 align="center"><font color="green">Insert Packages</font></h2>
+
+<form method="post" action="{%url 'checkpackages' %}">
+
+    {% csrf_token %}
+    <table align="center" border="5">
+    <tr>
+            <td>Enter Music Code</td>
+            <td><input type="text" name="musiccode" required/></td>
+        </tr>
+        <tr>
+            <td>Enter Music Title</td>
+            <td><input type="text" name="musictitle" required/></td>
+        </tr>
+        <tr>
+            <td>Enter Music Package</td>
+            <td><input type="text" name="musicpack" required/></td>
+        </tr>
+        <tr>
+            <td>Enter Music Description</td>
+            <td><input type="text" name="musicdesc" required/></td>
+        </tr>
+        <tr>
+            <td align="center"><input type="submit" value="Insert"></td>
+            <td align="center"><input type="reset" value="Clear"></td>
+        </tr>
+
+</form>
+<style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+        }
+    </style>
+<div>
+    {% for i in messages %}
+    <h4 align="center"><font color="red">{{i}}</font></h4>
+    {% endfor %}
+</div>
+{% endblock %}

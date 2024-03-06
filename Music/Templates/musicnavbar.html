@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+
+
+
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"></li>
+
+                <button class="button-login">
+                    <a href="{% url 'login' %}">Login </a>
+                </button>
+                <button class="button-register">
+                    <a href="{% url 'register' %}">Register</a>
+                </button>
+
+                <button class="button-about">
+                    <a href="{% url 'about' %}">About</a>
+                </button>
+                <button class="button-contact">
+                    <a href="{% url 'contact' %}">Contact</a>
+                </button>
+
+
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+    .navbar-brand img {
+        border-radius: 50%;
+        width: 60px; /* Adjust the size as needed */
+        height: 60px; /* Adjust the size as needed */
+    }
+</style>

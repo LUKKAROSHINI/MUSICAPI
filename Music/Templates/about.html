@@ -1,0 +1,81 @@
+{% block b1 %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+
+
+
+    <style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .about-section {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            margin: 50px auto;
+            max-width: 800px;
+            border-radius: 10px;
+        }
+
+        .about-section h5 {
+            text-align: center;
+            color: #333;
+        }
+
+        .about-section p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .side-container {
+            /* Add styles for the side container */
+        }
+    </style>
+    <div class="navbar-header">
+    <a class="navbar-brand" href="{% url 'home' %}"> <!-- Adjust the href to your home page URL -->
+        <img src="https://i.pinimg.com/474x/00/d1/de/00d1de99892304bf837d8b7d685f0bee.jpg" alt="Logo">
+    </a>
+</div>
+<style>
+    .navbar-brand img {
+        border-radius: 50%;
+        width: 60px; /* Adjust the size as needed */
+        height: 60px; /* Adjust the size as needed */
+    }
+</style>
+</head>
+<body>
+
+<div class="about-section">
+    <h5>About Us</h5>
+    <p>Some text about who we are and what we do.</p>
+    <p>Resize the browser window to see that this page is responsive.</p>
+
+    <h2>Our History in Music</h2>
+    <p>Here's a brief overview of our journey through music:</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum fermentum venenatis nisi, vitae luctus risus vehicula eget. Nulla consectetur eros nisi, id luctus est mattis ac. Donec mollis convallis arcu, vel dapibus velit. Ut sed justo vitae velit semper laoreet et ac magna.</p>
+    <p>Curabitur auctor tortor a tellus dignissim, in luctus neque efficitur. Nulla facilisi. Vivamus vel ante sem. Nulla facilisi. Integer eget ante sit amet lorem iaculis dapibus. Aliquam nec dolor mi. Nullam scelerisque feugiat pulvinar. Fusce non feugiat mi. Nulla facilisi.</p>
+    <p>Donec elementum, elit non vulputate commodo, libero ex egestas risus, vel laoreet urna tortor sit amet mauris. Suspendisse potenti. Aliquam quis velit sapien. Duis consectetur justo ac dapibus tincidunt. Nullam nec diam nunc. Cras nec metus consequat, posuere enim in, tincidunt purus.</p>
+</div>
+
+<div class="side-container">
+
+
+    <!-- Content for the side container goes here -->
+</div>
+{% include 'footer.html' %}
+</body>
+</html>
+{% endblock %}

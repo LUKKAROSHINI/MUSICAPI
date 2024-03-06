@@ -1,0 +1,86 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Registration</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin: auto;
+            margin-top: 50px;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .navbar-brand img {
+            border-radius: 50%;
+            width: 60px; /* Adjust the size as needed */
+            height: 60px; /* Adjust the size as needed */
+        }
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h6>User Registration</h6>
+    <form id="registrationForm" method="POST" action="{% url 'checkRegistration' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Enter Name:</label>
+            <input type="text" name="name" required/>
+        </div>
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" name="uname" required>
+        </div>
+        <div class="form-group">
+            <label for="addr">Address:</label>
+            <input type="text"  name="addr" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email"  name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="phno">PhoneNumber:</label>
+            <input type="tel"  name="phno" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password"  name="pwd" required>
+        </div>
+        <div class="form-group">
+            <label for="cpwd">Confirm Password:</label>
+            <input type="password" name="cpwd" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</div>
+
+{% include 'footer.html' %}
+
+<div>
+    {% for message in messages %}
+        <h6 align="center"><font color="red">{{ message }}</font></h6>
+    {% endfor %}
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>

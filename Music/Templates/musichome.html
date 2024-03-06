@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VIBE LEASHER</title>
+    <link type="text/css" rel="stylesheet" href="{% static 'style.css'%}">
+
+    <style>
+        .navbar-brand img {
+            border-radius: 50%;
+            width: 60px; /* Adjust the size as needed */
+            height: 60px; /* Adjust the size as needed */
+        }
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+            color: white; /* Adjust text color for better readability */
+        }
+        /* CSS for audio elements */
+        audio {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Container for audio player */
+        .audio-container {
+            width: 60%; /* Adjust the width as needed */
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        }
+
+        /* Customize audio controls */
+        .audio-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        /* Playback speed control */
+        .playback-speed {
+            margin-right: 20px;
+        }
+
+        /* Download button */
+        .download-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Add a smooth transition */
+        }
+
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Style select dropdown */
+        #songSelect {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            background-image: url('https://img.icons8.com/material-outlined/24/000000/music.png'); /* Add music icon */
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 24px 24px;
+            appearance: none; /* Remove default arrow in Chrome/Opera/Safari */
+            -moz-appearance: none; /* Remove default arrow in Firefox */
+            -webkit-appearance: none; /* Remove default arrow in Chrome/Opera/Safari */
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="https://i.pinimg.com/474x/00/d1/de/00d1de99892304bf837d8b7d685f0bee.jpg" alt="Logo">
+        </a>
+    </div>
+
+    {% block 'b1' %}
+    <h2 align="center"><font color="#ff9900">MUSIC STREAMING API</font></h2>
+
+    <div>
+        {% for i in messages %}
+        <h4 align="center"><font color="red" >{{i}}</font></h4>
+        {% endfor %}
+    </div>
+    <button class="button-Viewpackages">
+      <a href="{% url 'viewplaces' %}"> View Packages </a>
+        <button><a href="{% url 'billing' %}">Payment</a></button>
+   <button class="button-mail"><a href ="{% url 'contactmail' %}">mail</a></button>
+            <button class="button-logout">  <a href ="{% url 'logout' %}">Log Out</a></button>
+
+    {% endblock %}
+
+
+
+    <!-- Search Form -->
+    <div style="text-align: center;">
+        <form id="searchForm" class="d-flex" role="search" style="margin-top: 20px;">
+            <input class="form-control me-2" type="search" id="searchInput" placeholder="Search Spotify" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Audio Player -->
+    <div class="audio-container">
+        <select id="songSelect">
+            <option value="https://ww-pagalworld.com/files/download/id/1483">Shape of You</option>
+            <option value="https://ww-pagalworld.com/files/download/id/1461">Despacito</option>
+            <option value="https://www.pagalworld.com.se/files/download/id/67312">Chaleya</option>
+            <option value="https://www.pagalworld.com.se/files/download/id/64630">Maan Meri Jaan</option>
+            <!-- Add more options for other songs as needed -->
+        </select>
+
+        <!-- First Audio Element -->
+        <audio id="myAudio1" controls>
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Audio Controls -->
+        <div class="audio-controls">
+            <!-- Playback speed control -->
+            <select id="playbackSpeed" class="playback-speed">
+                <option value="0.5">0.5x</option>
+                <option value="1" selected>1x</option>
+                <option value="1.5">1.5x</option>
+                <option value="2">2x</option>
+            </select>
+
+            <!-- Download button -->
+            <button id="downloadButton" class="download-button">Download</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        // Get the audio elements
+        var audio1 = document.getElementById("myAudio1");
+        var songSelect = document.getElementById("songSelect");
+        var playbackSpeed = document.getElementById("playbackSpeed");
+        var downloadButton = document.getElementById("downloadButton");
+
+        // Handle form submission
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value;
+            // You can add your search functionality here
+            // For now, let's just handle the "Shape of You" and "Despacito" cases
+            if (searchTerm.toLowerCase() === "shape of you") {
+                // Set the source of the audio element to "Shape of You"
+                audio1.src = "https://ww-pagalworld.com/files/download/id/1483";
+                // Play the audio
+                audio1.play();
+            } else if (searchTerm.toLowerCase() === "despacito") {
+                // Set the source of the audio element to "Despacito"
+                audio1.src = "https://ww-pagalworld.com/files/download/id/1461";
+                // Play the audio
+                audio1.play();
+            } else {
+                // Handle other search terms here
+                alert("Sorry, this demo only supports 'Shape of You', 'Despacito', 'Chaleya', and 'Maan Meri Jaan' as search terms.");
+            }
+        });
+
+        // Change the audio source and playback speed when a different song is selected
+        songSelect.addEventListener('change', function() {
+            // You can allocate each song to a different audio element here
+            // For now, let's just play the first audio element with the selected song
+            audio1.src = this.value;
+            audio1.play();
+        });
+
+        // Change playback speed
+        playbackSpeed.addEventListener('change', function() {
+            audio1.playbackRate = parseFloat(this.value);
+        });
+
+        // Download button functionality
+        downloadButton.addEventListener('click', function() {
+            var url = songSelect.value;
+            // You can add download functionality here
+            alert("Downloading: " + url);
+        });
+
+        // Automatically load and play "Shape of You" when the page loads
+        window.addEventListener('load', function() {
+            // Set the source of the audio element to the default song
+            audio1.src = songSelect.value;
+            // Play the audio
+            audio1.play();
+        });
+    </script>
+
+{% include 'footer.html' %}
+</body>
+</html>

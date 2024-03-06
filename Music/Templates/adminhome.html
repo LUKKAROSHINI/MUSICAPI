@@ -1,0 +1,59 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MUSIC API</title>
+<link type="text/css" rel="stylesheet" href="{% static 'style.css'%}"
+
+</head>
+<body>
+
+
+<br><br><br>
+{% block 'b1' %}
+<h2 align="center"> <font color="#ff9900">VIBE LEASHER</font></h2>
+<div class="navbar-header">
+    <a class="navbar-brand" href="{% url 'home' %}"> <!-- Adjust the href to your home page URL -->
+        <img src="https://i.pinimg.com/474x/00/d1/de/00d1de99892304bf837d8b7d685f0bee.jpg" alt="Logo">
+    </a>
+</div>
+
+
+
+    <style>
+    .navbar-brand img {
+        border-radius: 50%;
+        width: 60px; /* Adjust the size as needed */
+        height: 60px; /* Adjust the size as needed */
+    }
+</style>
+  <button class="button-Insertpackages">
+      <a href="{% url 'checkpackages' %}"> Insert Packages </a>
+<button class="button-Viewpackages">
+     <a href="{% url 'viewplaces' %}"> View Packages </a>
+    <button class="button-logout"><a href ="{% url 'logout' %}">Log Out</a></button>
+
+
+
+
+{% include 'footer.html' %}
+
+<div>
+    {% for i in messages %}
+    <h4 align="center"><font color="red" >{{i}}</font></h4>
+ {% endfor %}
+</div>
+<style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+        }
+    </style>
+{% endblock %}
+
+</body>
+</html>

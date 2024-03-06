@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Billing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        #upgradeButton {
+            background-color: #007bff;
+        }
+
+        #cancelButton {
+            background-color: #dc3545;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Billing Information</h2>
+        <p>Subscription Plan: Premium</p>
+        <p id="billingDate">Next Billing Date: </p>
+        <p>Payment Method: Visa ending in 1234</p>
+        <button id="upgradeButton">Upgrade Plan</button>
+        <button id="cancelButton">Cancel Subscription</button>
+
+        <h2>Select Song:</h2>
+        <select id="songSelect">
+            <option value="https://ww-pagalworld.com/files/download/id/1483">Shape of You</option>
+            <option value="https://ww-pagalworld.com/files/download/id/1461">Despacito</option>
+            <option value="https://www.pagalworld.com.se/files/download/id/67312">Chaleya</option>
+            <option value="https://www.pagalworld.com.se/files/download/id/64630">Maan Meri Jaan</option>
+            <!-- Add more options for other songs as needed -->
+        </select>
+
+        <h2>Payment Details</h2>
+        <form id="paymentForm">
+            <div id="card-element"><!-- Stripe Elements Placeholder --></div>
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        var stripe = Stripe('your_stripe_public_key');
+        var elements = stripe.elements();
+        var cardElement = elements.create('card');
+
+        cardElement.mount('#card-element');
+
+        // Function to calculate next billing date
+        function getNextBillingDate() {
+            var currentDate = new Date();
+            // Assuming monthly billing cycle, add 30 days to current date
+            currentDate.setDate(currentDate.getDate() + 30);
+            return currentDate.toDateString();
+        }
+
+        // Update the billing date display
+        document.getElementById('billingDate').textContent += getNextBillingDate();
+
+        document.getElementById('upgradeButton').addEventListener('click', function() {
+            // Redirect user to upgrade page or show payment modal
+            // Here, you can implement your payment functionality
+            var selectedSong = document.getElementById('songSelect').value;
+            alert('Upgrade plan and pay for song: ' + selectedSong);
+        });
+
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            // Cancel user's subscription
+            // Send request to server to cancel subscription
+            // Here, you can implement code to remove the selected song
+            var songSelect = document.getElementById('songSelect');
+            var selectedSongIndex = songSelect.selectedIndex;
+            songSelect.remove(selectedSongIndex);
+            alert('Subscription canceled. Selected song removed.');
+        });
+
+        // Handle form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect payment method details
+            stripe.createPaymentMethod({
+                type: 'card',
+                card: cardElement,
+                billing_details: {
+                    // Include billing details if necessary
+                }
+            }).then(function(result) {
+                if (result.error) {
+                    // Display error to your customer
+                    console.error(result.error.message);
+                } else {
+                    // Use payment method to process payment
+                    // Send payment method ID to server for further processing
+                    var paymentMethodId = result.paymentMethod.id;
+                    // Send paymentMethodId to your server for processing
+                    console.log('Payment successful. Payment Method ID: ' + paymentMethodId);
+                    // Optionally, redirect user to a confirmation page
+                }
+            });
+        });
+    </script>
+<style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+        }
+    </style>
+{% include 'footer.html' %}
+</body>
+</html>

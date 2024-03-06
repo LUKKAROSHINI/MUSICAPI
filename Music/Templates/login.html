@@ -1,0 +1,75 @@
+
+
+
+    {% load static %}
+    {% block b1 %}
+ <div class="navbar-header">
+    <a class="navbar-brand" href="{% url 'home' %}"> <!-- Adjust the href to your home page URL -->
+        <img src="https://i.pinimg.com/474x/00/d1/de/00d1de99892304bf837d8b7d685f0bee.jpg" alt="Logo">
+    </a>
+</div>
+     <link type="text/css" rel="stylesheet" href="{% static 'style.css' %}">
+<div>
+    <button class="button-changepassword">
+                    <a href="{% url 'changepassword' %}">change password </a>
+        </div>
+<style>
+    .navbar-brand img {
+        border-radius: 50%;
+        width: 60px; /* Adjust the size as needed */
+        height: 60px; /* Adjust the size as needed */
+    }
+</style>
+
+
+    <div class="login-container" align="center">
+        <form method="post" action="{% url 'checkvibelogin' %}">
+            {% csrf_token %}
+            <h3>Login</h3>
+
+            <table border="5">
+                <tr>
+                    <td>
+                        <label>Enter UserName:</label>
+                    </td>
+                    <td>
+                        <input type="text" name="uname" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label>Enter Password:</label>
+                    </td>
+                    <td>
+                        <input type="password" name="pwd" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input type="submit" value="Login">
+                        <input type="reset" value="Clear">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+
+<style>
+        body {
+            background-image: url('https://th.bing.com/th/id/R.e64055d7c786d2ac6eb5113bf10b2f4b?rik=YlDSQlnIEOE5Jw&riu=http%3a%2f%2fwww.pixelstalk.net%2fwp-content%2fuploads%2f2016%2f05%2fBest-music-wallpaper-hd.jpg&ehk=3iPywrl8KzGA3PaAvix7zenXAtvCl%2b5Jh2pCBiZ6Gu4%3d&risl=&pid=ImgRaw&r=0');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* Optional: Fixed background */
+            /* Add other styles as needed */
+        }
+    </style>
+
+<div>
+    {% for i in messages %}
+    <h4 align="center"><font color="red">{{i}}</font></h4>
+    {% endfor %}
+</div>
+{% include 'footer.html' %}
+
+{% endblock %}
