@@ -1,6 +1,8 @@
+from mailbox import Message
+
 from django.core.mail import send_mail
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Register, Packages
 from .models import VibePackages  # Import the VibePackages model
@@ -101,4 +103,5 @@ def contactmail(request):
 
     else:
         return render(request,'mail.html')
+
 

@@ -89,7 +89,6 @@
         </a>
     </div>
 
-    {% block 'b1' %}
     <h2 align="center"><font color="#ff9900">MUSIC STREAMING API</font></h2>
 
     <div>
@@ -98,14 +97,17 @@
         {% endfor %}
     </div>
     <button class="button-Viewpackages">
-      <a href="{% url 'viewplaces' %}"> View Packages </a>
-        <button><a href="{% url 'billing' %}">Payment</a></button>
-   <button class="button-mail"><a href ="{% url 'contactmail' %}">mail</a></button>
-            <button class="button-logout">  <a href ="{% url 'logout' %}">Log Out</a></button>
-
-    {% endblock %}
-
-
+        <a href="{% url 'viewplaces' %}"> View Packages </a>
+    </button>
+    <button>
+        <a href="{% url 'billing' %}">Payment</a>
+    </button>
+    <button class="button-mail">
+        <a href="{% url 'contactmail' %}">mail</a>
+    </button>
+    <button class="button-logout">
+        <a href="{% url 'logout' %}">Log Out</a>
+    </button>
 
     <!-- Search Form -->
     <div style="text-align: center;">
@@ -118,14 +120,27 @@
     <!-- Audio Player -->
     <div class="audio-container">
         <select id="songSelect">
-            <option value="https://ww-pagalworld.com/files/download/id/1483">Shape of You</option>
-            <option value="https://ww-pagalworld.com/files/download/id/1461">Despacito</option>
-            <option value="https://www.pagalworld.com.se/files/download/id/67312">Chaleya</option>
-            <option value="https://www.pagalworld.com.se/files/download/id/64630">Maan Meri Jaan</option>
-            <!-- Add more options for other songs as needed -->
+            <option value="https://ww-pagalworld.com/files/download/id/1483" data-image="https://th.bing.com/th/id/OIP.J-z8JrhX2EhcIfugldA8sQHaHa?rs=1&pid=ImgDetMain">Shape of You</option>
+            <option value="https://ww-pagalworld.com/files/download/id/1461" data-image="https://th.bing.com/th/id/OIP.jAYv_fgDtkMfzbTmWAdWhwAAAA?rs=1&pid=ImgDetMain">Despacito</option>
+            <option value="https://www.pagalworld.com.se/files/download/id/67312" data-image="https://c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014337-500x500.jpg">Chaleya</option>
+            <option value="https://www.pagalworld.com.se/files/download/id/64630" data-image="https://i.ytimg.com/vi/QMrVGbZkeyQ/maxresdefault.jpg">Maan Meri Jaan</option>
+          <option value="https://ww-pagalworld.com/files/download/id/13793" data-image="https://ww-pagalworld.com/uploads/thumb/sft28/13793_4.jpg">Starboy </option>
+             <option value="https://www.pagalworld.com.cm/files/download/id/69950" data-image="https://www.pagalworld.com.cm/siteuploads/thumb/sft140/69950_4.jpg"> Teri Baaton Mein Aisa Uljha Jiya</option>
+            <option value="https://djmaza.live/files/download/id/5143" data-image="https://djmaza.live/siteuploads/thumb/c/339_resize2x_200x200.webp">Jab Tak </option>
+            <option value="https://www.pagalworld.com.cm/files/download/id/6591" data-image="https://www.pagalworld.com.cm/siteuploads/thumb/sft14/6591_4.jpg">Kesariya  </option>
+            <option value="https://www.pagalworld.com.sc/files/download/id/15376" data-image="https://www.pagalworld.com.sc/datadbs/thumb/sft31/15376_4.jpg">Tere Vaste</option>
+            <option value="https://pagalworld.com.vc/files/download/id/6150" data-image="https://pagalworld.com.vc/uploads/thumb/sft13/6150_4.jpg">Closer </option>
+            <option value="https://pagalworld.com.vc/files/download/id/17092" data-image="https://pagalworld.com.vc/uploads/thumb/sft35/17092_4.jpg">The Nights </option>
+            <option value="https://paglasongs.com/files/download/id/3868" data-image="https://paglasongs.com/uploads/thumb/sft8/3868_4.jpg">Cheap Thrills</option>
+            <option value="https://paglasongs.com/files/download/id/14824" data-image="https://paglasongs.com/uploads/thumb/sft30/14824_4.jpg">Heeriye </option>
+
+
         </select>
 
-        <!-- First Audio Element -->
+        <!-- Image display for selected song -->
+        <img id="songImage" src="" alt="Song Image" style="width: 200px; height: 200px; display: block; margin: 0 auto; margin-top: 20px;">
+
+        <!-- Audio element -->
         <audio id="myAudio1" controls>
             Your browser does not support the audio element.
         </audio>
@@ -152,6 +167,7 @@
         var songSelect = document.getElementById("songSelect");
         var playbackSpeed = document.getElementById("playbackSpeed");
         var downloadButton = document.getElementById("downloadButton");
+        var songImage = document.getElementById("songImage");
 
         // Handle form submission
         document.getElementById('searchForm').addEventListener('submit', function(event) {
@@ -162,11 +178,15 @@
             if (searchTerm.toLowerCase() === "shape of you") {
                 // Set the source of the audio element to "Shape of You"
                 audio1.src = "https://ww-pagalworld.com/files/download/id/1483";
+                // Set the image source
+                songImage.src = "https://th.bing.com/th/id/OIP.J-z8JrhX2EhcIfugldA8sQHaHa?rs=1&pid=ImgDetMain";
                 // Play the audio
                 audio1.play();
             } else if (searchTerm.toLowerCase() === "despacito") {
                 // Set the source of the audio element to "Despacito"
                 audio1.src = "https://ww-pagalworld.com/files/download/id/1461";
+                // Set the image source
+                songImage.src = "image_url_for_despacito";
                 // Play the audio
                 audio1.play();
             } else {
@@ -181,6 +201,10 @@
             // For now, let's just play the first audio element with the selected song
             audio1.src = this.value;
             audio1.play();
+            // Set the image source
+            var selectedOption = this.options[this.selectedIndex];
+            var imageUrl = selectedOption.getAttribute("data-image");
+            songImage.src = imageUrl;
         });
 
         // Change playback speed
@@ -199,11 +223,27 @@
         window.addEventListener('load', function() {
             // Set the source of the audio element to the default song
             audio1.src = songSelect.value;
+            // Set the default image source
+            var defaultImageUrl = songSelect.options[songSelect.selectedIndex].getAttribute("data-image");
+            songImage.src = defaultImageUrl;
             // Play the audio
             audio1.play();
         });
     </script>
 
-{% include 'footer.html' %}
+    {% include 'footer.html' %}
 </body>
+
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings =
+            {"appId":"6e520513e1a6068512c9d2e471460308","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+/* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
+
 </html>
